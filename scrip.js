@@ -1,14 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  const intro = document.getElementById("intro");
+  const main = document.getElementById("main");
+  const bg1 = document.getElementById("bg1");
+  const bg2 = document.getElementById("bg2");
+  const texto = document.getElementById("mensaje");
+  const titulo = document.querySelector(".titulo");
+
+  // 🔴 VALIDACIÓN (CLAVE)
+  if (!intro || !main || !bg1 || !bg2 || !texto || !titulo) {
+    console.error("❌ Error: faltan elementos en el HTML");
+    return;
+  }
+
   // INTRO
   setTimeout(() => {
-    const intro = document.getElementById("intro");
     intro.style.transform = "scale(1.2)";
     intro.style.opacity = "0";
 
     setTimeout(() => {
       intro.style.display = "none";
-      document.getElementById("main").classList.remove("hidden");
+      main.classList.remove("hidden");
     }, 800);
   }, 1800);
 
@@ -20,8 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let actual = 0;
-  const bg1 = document.getElementById("bg1");
-  const bg2 = document.getElementById("bg2");
 
   bg1.style.backgroundImage = `url(${imagenes[0]})`;
 
@@ -47,7 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let index = 0;
-  const texto = document.getElementById("mensaje");
 
   function cambiarTexto() {
     texto.classList.remove("show");
@@ -67,8 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const moveX = (e.clientX - window.innerWidth / 2) / 60;
     const moveY = (e.clientY - window.innerHeight / 2) / 60;
 
-    document.querySelector(".titulo").style.transform =
-      `translate(${moveX}px, ${moveY}px)`;
+    titulo.style.transform = `translate(${moveX}px, ${moveY}px)`;
   });
 
 });
