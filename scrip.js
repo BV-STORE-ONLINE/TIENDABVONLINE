@@ -1,79 +1,74 @@
-// INTRO SALIDA PRO
-setTimeout(() => {
-  const intro = document.getElementById("intro");
-  intro.style.transform = "scale(1.2)";
-  intro.style.opacity = "0";
+document.addEventListener("DOMContentLoaded", () => {
 
+  // INTRO
   setTimeout(() => {
-    intro.style.display = "none";
-    document.getElementById("main").classList.remove("hidden");
-  }, 800);
-}, 1800);
+    const intro = document.getElementById("intro");
+    intro.style.transform = "scale(1.2)";
+    intro.style.opacity = "0";
 
-// FONDOS
-const imagenes = [
-  "https://images.unsplash.com/photo-1520975916090-3105956dac38",
-  "https://images.unsplash.com/photo-1512436991641-6745cdb1723f",
-  "https://images.unsplash.com/photo-1490481651871-ab68de25d43d"
-];
+    setTimeout(() => {
+      intro.style.display = "none";
+      document.getElementById("main").classList.remove("hidden");
+    }, 800);
+  }, 1800);
 
-let actual = 0;
-const bg1 = document.getElementById("bg1");
-const bg2 = document.getElementById("bg2");
+  // FONDOS
+  const imagenes = [
+    "https://images.unsplash.com/photo-1520975916090-3105956dac38",
+    "https://images.unsplash.com/photo-1512436991641-6745cdb1723f",
+    "https://images.unsplash.com/photo-1490481651871-ab68de25d43d"
+  ];
 
-// ✅ CORREGIDO
-bg1.style.backgroundImage = `url(${imagenes[0]})`;
+  let actual = 0;
+  const bg1 = document.getElementById("bg1");
+  const bg2 = document.getElementById("bg2");
 
-setInterval(() => {
-  actual = (actual + 1) % imagenes.length;
+  bg1.style.backgroundImage = `url(${imagenes[0]})`;
 
-  // ✅ CORREGIDO
-  bg2.style.backgroundImage = `url(${imagenes[actual]})`;
-  bg2.style.opacity = 1;
+  setInterval(() => {
+    actual = (actual + 1) % imagenes.length;
 
-  setTimeout(() => {
-    bg1.style.backgroundImage = bg2.style.backgroundImage;
-    bg2.style.opacity = 0;
-  }, 1000);
+    bg2.style.backgroundImage = `url(${imagenes[actual]})`;
+    bg2.style.opacity = 1;
 
-}, 5000);
+    setTimeout(() => {
+      bg1.style.backgroundImage = bg2.style.backgroundImage;
+      bg2.style.opacity = 0;
+    }, 1000);
 
-// TEXTO
-const frases = [
-  "Esto no es solo ropa",
-  "Es una nueva etapa",
-  "Prepárate para el drop",
-  "BV STORE está por comenzar"
-];
+  }, 5000);
 
-let index = 0;
-const texto = document.getElementById("mensaje");
+  // TEXTO
+  const frases = [
+    "Esto no es solo ropa",
+    "Es una nueva etapa",
+    "Prepárate para el drop",
+    "BV STORE está por comenzar"
+  ];
 
-function cambiarTexto() {
-  texto.classList.remove("show");
+  let index = 0;
+  const texto = document.getElementById("mensaje");
 
-  setTimeout(() => {
-    texto.textContent = frases[index];
-    texto.classList.add("show");
-    index = (index + 1) % frases.length;
-  }, 300);
-}
+  function cambiarTexto() {
+    texto.classList.remove("show");
 
-cambiarTexto();
-setInterval(cambiarTexto, 2500);
+    setTimeout(() => {
+      texto.textContent = frases[index];
+      texto.classList.add("show");
+      index = (index + 1) % frases.length;
+    }, 300);
+  }
 
-// PARALLAX
-document.addEventListener("mousemove", (e) => {
-  const x = e.clientX;
-  const y = e.clientY;
+  cambiarTexto();
+  setInterval(cambiarTexto, 2500);
 
-  const centerX = window.innerWidth / 2;
-  const centerY = window.innerHeight / 2;
+  // PARALLAX
+  document.addEventListener("mousemove", (e) => {
+    const moveX = (e.clientX - window.innerWidth / 2) / 60;
+    const moveY = (e.clientY - window.innerHeight / 2) / 60;
 
-  const moveX = (x - centerX) / 60;
-  const moveY = (y - centerY) / 60;
+    document.querySelector(".titulo").style.transform =
+      `translate(${moveX}px, ${moveY}px)`;
+  });
 
-  // ✅ CORREGIDO
-  document.querySelector(".titulo").style.transform =
-    `translate(${moveX}px, ${moveY}px)`;
 });
