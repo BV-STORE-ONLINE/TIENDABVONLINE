@@ -1,4 +1,4 @@
-// INTRO SALIDA
+// INTRO SALIDA PRO
 setTimeout(() => {
   const intro = document.getElementById("intro");
   intro.style.transform = "scale(1.2)";
@@ -21,11 +21,13 @@ let actual = 0;
 const bg1 = document.getElementById("bg1");
 const bg2 = document.getElementById("bg2");
 
+// ✅ CORREGIDO
 bg1.style.backgroundImage = `url(${imagenes[0]})`;
 
 setInterval(() => {
   actual = (actual + 1) % imagenes.length;
 
+  // ✅ CORREGIDO
   bg2.style.backgroundImage = `url(${imagenes[actual]})`;
   bg2.style.opacity = 1;
 
@@ -62,9 +64,16 @@ setInterval(cambiarTexto, 2500);
 
 // PARALLAX
 document.addEventListener("mousemove", (e) => {
-  const moveX = (e.clientX - window.innerWidth / 2) / 60;
-  const moveY = (e.clientY - window.innerHeight / 2) / 60;
+  const x = e.clientX;
+  const y = e.clientY;
 
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+
+  const moveX = (x - centerX) / 60;
+  const moveY = (y - centerY) / 60;
+
+  // ✅ CORREGIDO
   document.querySelector(".titulo").style.transform =
     `translate(${moveX}px, ${moveY}px)`;
 });
