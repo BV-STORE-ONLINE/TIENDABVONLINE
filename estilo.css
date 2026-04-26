@@ -1,0 +1,238 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* INTRO */
+#intro {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  transition: all 0.8s ease;
+}
+
+.intro-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 3rem;
+  letter-spacing: 8px;
+  color: white;
+  overflow: hidden;
+  animation: zoomBlur 2s ease forwards;
+}
+
+.intro-logo .top {
+  transform: translateY(-100%);
+  opacity: 0;
+  animation: slideDown 1s ease forwards;
+}
+
+.intro-logo .bottom {
+  transform: translateY(100%);
+  opacity: 0;
+  animation: slideUp 1s ease forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes slideDown {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes zoomBlur {
+  0% { transform: scale(0.7); filter: blur(10px); }
+  60% { transform: scale(1.1); filter: blur(0); }
+  100% { transform: scale(1); }
+}
+
+/* MAIN */
+.hidden { display: none; }
+
+#main {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+}
+
+/* FONDOS */
+.bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1s ease;
+}
+
+#bg1 { opacity: 1; }
+#bg2 { opacity: 0; }
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.75);
+}
+
+/* HEADER */
+.header {
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  text-align: center;
+  z-index: 2;
+}
+
+.logo {
+  letter-spacing: 6px;
+}
+
+/* CONTENIDO */
+.contenido {
+  text-align: center;
+  z-index: 2;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
+  filter: blur(10px);
+  animation: smoothEntry 1.5s ease forwards;
+}
+
+@keyframes smoothEntry {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.tag {
+  color: #aaa;
+  letter-spacing: 3px;
+  font-size: 0.8rem;
+}
+
+/* GLITCH */
+.titulo {
+  font-size: 3rem;
+  letter-spacing: 6px;
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+.glitch::before {
+  color: cyan;
+  animation: glitchTop 2s infinite;
+  clip-path: inset(0 0 50% 0);
+}
+
+.glitch::after {
+  color: magenta;
+  animation: glitchBottom 2s infinite;
+  clip-path: inset(50% 0 0 0);
+}
+
+@keyframes glitchTop {
+  50% { transform: translate(-2px,-2px); }
+}
+
+@keyframes glitchBottom {
+  50% { transform: translate(2px,2px); }
+}
+
+/* TEXTO PRO */
+.mensaje {
+  margin-top: 15px;
+  color: #ccc;
+  font-size: 1rem;
+  min-height: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.mensaje.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* BOTONES */
+.redes {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: white;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.2);
+
+  transition: all 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-5px); }
+}
+
+.btn:hover {
+  transform: scale(1.15);
+}
+
+.ig:hover { background: #E1306C; box-shadow: 0 0 25px #E1306C; }
+.fb:hover { background: #1877F2; box-shadow: 0 0 25px #1877F2; }
+.wa:hover { background: #25D366; box-shadow: 0 0 25px #25D366; }
+
+.btn:active {
+  transform: scale(0.9);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .titulo { font-size: 2rem; }
+  .btn { width: 50px; height: 50px; }
+}
+
+@media (max-width: 400px) {
+  .titulo { font-size: 1.6rem; }
+}
